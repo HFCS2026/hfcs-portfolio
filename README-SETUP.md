@@ -40,22 +40,32 @@ You do not need to write any code. Every step below is copy, paste, or click.
 
 ---
 
-## Step 1 — Create the GitHub repository
+## Step 1 — Publish the repository with GitHub Desktop
 
-1. Sign in to GitHub, click the **+** at the top right, choose **New repository**.
-2. Repository name: `hfcs-portfolio`
-3. Set it to **Public**. (It has to be public for GitHub Pages to serve the photos free.
-   Only approved job photos ever land in it — no customer names, no addresses.)
-4. Leave everything else alone and click **Create repository**.
-5. On the next screen click **uploading an existing file**.
-6. Drag in *everything* from the `Portfolio Automation` folder — `sync_portfolio.py`,
-   `requirements.txt`, the `docs` folder, the `seed` folder, and the `.github` folder.
-   Then click **Commit changes**.
+**This folder is already a git repository with the first commit made.** You do not have to
+create anything, upload anything, or type any commands. GitHub Desktop just has to publish it.
 
-> If GitHub's web uploader skips the `.github` folder (some browsers hide folders starting
-> with a dot), create it by hand: **Add file → Create new file**, and for the filename type
-> `.github/workflows/sync-portfolio.yml` — typing the slashes makes the folders. Then paste
-> in the contents of that file.
+1. Open **GitHub Desktop** and sign in with the account you created, if it asks.
+2. **File → Add Local Repository…**
+3. Choose this folder:
+   `Documents / Claude / Projects / Happy Family Cleaning Solutions Success Plan / Website Assets / Portfolio Automation`
+   It should open showing **No local changes** and one commit in History — that is correct, it
+   means everything is already staged and saved.
+4. Click **Publish repository** in the top bar.
+   - **Name:** `hfcs-portfolio`
+   - **Description:** optional
+   - **UNCHECK "Keep this code private."** ← this one matters. GitHub Pages only serves a free
+     site from a public repository, so if this stays checked the gallery will never load.
+5. Click **Publish repository**. It takes a few seconds.
+
+You now have `github.com/YOURUSERNAME/hfcs-portfolio`. Write that username down — Step 7 needs it.
+
+> **If GitHub Desktop says the folder "does not appear to be a Git repository":** something
+> removed the hidden `.git` folder. Tell me and I'll rebuild it — don't create a new repository
+> by hand, because the workflow file lives in a hidden folder the web uploader tends to skip.
+
+> This folder lives in Documents. If Documents is synced to iCloud and GitHub Desktop ever
+> complains about a locked or busy file, that is why — it clears on a retry.
 
 ---
 
