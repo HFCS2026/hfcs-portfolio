@@ -1,0 +1,33 @@
+{
+  "_comment": [
+    "Your existing portfolio photos — the ones already on the website that did not come",
+    "through the forms. Drop the image files into seed/images/ and list them here.",
+    "Everything in this file appears in the gallery alongside the automatic entries.",
+    "",
+    "Each item needs a service and either 'pairs' (before/after) or 'extras' (single shots).",
+    "Filenames are case-sensitive and must match what is in seed/images/ exactly.",
+    "Delete the examples below once you have added your own."
+  ],
+
+  "items": [
+    {
+      "id": "seed-apartment-cleanout",
+      "service": "Junk Removal",
+      "title": "Apartment cleanout",
+      "date": "2026-05-14",
+      "pairs": [
+        { "before": "apartment-cleanout-1-before.jpg", "after": "apartment-cleanout-1-after.jpg" },
+        { "before": "apartment-cleanout-2-before.jpg", "after": "apartment-cleanout-2-after.jpg" }
+      ],
+      "extras": []
+    },
+    {
+      "id": "seed-2b2b-deep-clean",
+      "service": "House Cleaning",
+      "title": "2 bed 2 bath deep cleaning",
+      "date": "2026-04-02",
+      "pairs": [],
+      "extras": ["2b2b-kitchen.jpg", "2b2b-bathroom.jpg", "2b2b-bedroom.jpg", "2b2b-laundry.jpg"]
+    }
+  ]
+}

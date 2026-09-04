@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Work — Happy Family Cleaning Solutions</title>
+<meta name="robots" content="noindex">
+<style>
+  :root{
+    --cyan:#29ABE2; --cyan-dark:#1B87B4; --ink:#141618; --body:#4a5158;
+    --line:#e3e7ea; --bg:#ffffff; --card:#ffffff; --soft:#f5f7f9;
+    --radius:14px; --shadow:0 1px 2px rgba(20,22,24,.05), 0 8px 24px rgba(20,22,24,.07);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--body);
+    font:16px/1.55 "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:8px 20px 40px}
+
+  /* ---- filter bar ---- */
+  .bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:14px 0 20px}
+  .chip{
+    appearance:none;border:1.5px solid var(--line);background:#fff;color:var(--body);
+    font:600 13.5px/1 inherit;letter-spacing:.01em;padding:9px 15px;border-radius:999px;
+    cursor:pointer;transition:.15s ease;white-space:nowrap;
+  }
+  .chip:hover{border-color:var(--cyan);color:var(--cyan-dark)}
+  .chip[aria-pressed="true"]{background:var(--cyan);border-color:var(--cyan);color:#fff}
+  .chip:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+  .count{margin-left:auto;font-size:13px;color:#8b949b;white-space:nowrap}
+
+  /* ---- grid ---- */
+  .grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;box-shadow:var(--shadow);transition:.18s ease;
+  }
+  .card:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(20,22,24,.06),0 14px 32px rgba(20,22,24,.10)}
+  .meta{padding:14px 16px 16px}
+  .svc{
+    display:inline-block;font:700 11px/1 inherit;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--cyan-dark);background:rgba(41,171,226,.10);padding:6px 9px;border-radius:5px;
+  }
+  .title{margin:9px 0 0;font:600 16px/1.35 inherit;color:var(--ink)}
+  .date{margin:4px 0 0;font-size:13px;color:#949ca3}
+
+  /* ---- before / after slider ---- */
+  .ba{position:relative;aspect-ratio:4/3;background:var(--soft);overflow:hidden;
+      cursor:ew-resize;touch-action:none;user-select:none}
+  .ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .ba .after{clip-path:inset(0 0 0 var(--x,50%))}
+  .ba .handle{position:absolute;top:0;bottom:0;left:var(--x,50%);width:2px;
+      background:#fff;box-shadow:0 0 0 1px rgba(20,22,24,.18);pointer-events:none}
+  .ba .knob{position:absolute;top:50%;left:var(--x,50%);width:38px;height:38px;
+      transform:translate(-50%,-50%);border-radius:50%;background:#fff;
+      box-shadow:0 2px 10px rgba(20,22,24,.3);pointer-events:none;
+      display:grid;place-items:center}
+  .ba .knob::before{content:"‹ ›";font:600 15px/1 inherit;color:var(--cyan-dark);letter-spacing:-1px}
+  .tag{
+    position:absolute;top:10px;font:700 10.5px/1 inherit;letter-spacing:.1em;
+    text-transform:uppercase;color:#fff;background:rgba(20,22,24,.62);
+    padding:6px 9px;border-radius:4px;pointer-events:none;backdrop-filter:blur(2px);
+  }
+  .tag.b{left:10px} .tag.a{right:10px;background:rgba(41,171,226,.92)}
+  .expand{
+    position:absolute;right:10px;bottom:10px;z-index:2;appearance:none;border:0;
+    background:rgba(20,22,24,.62);color:#fff;font:600 12px/1 inherit;
+    padding:8px 11px;border-radius:6px;cursor:pointer;backdrop-filter:blur(2px);
+  }
+  .expand:hover{background:var(--cyan)}
+
+  /* single (unpaired) photo */
+  .single{position:relative;aspect-ratio:4/3;background:var(--soft);cursor:zoom-in}
+  .single img{width:100%;height:100%;object-fit:cover;display:block}
+
+  /* ---- states ---- */
+  .state{padding:56px 20px;text-align:center;color:#8b949b}
+  .state h2{margin:0 0 6px;font:600 18px/1.3 inherit;color:var(--ink)}
+  .skeleton{background:var(--soft);border-radius:var(--radius);aspect-ratio:4/3;
+      animation:pulse 1.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+
+  /* ---- lightbox ---- */
+  dialog#lb{border:0;padding:0;background:transparent;max-width:min(1100px,94vw);width:100%}
+  dialog#lb::backdrop{background:rgba(12,14,16,.88)}
+  #lb .shell{background:#0e1012;border-radius:12px;overflow:hidden}
+  #lb .stage{position:relative;height:min(78vh,68vw);min-height:280px;background:#0e1012}
+  #lb .ba,#lb .single{position:absolute;inset:0;width:100%;height:100%;
+      aspect-ratio:auto;max-height:none}
+  #lb .ba img{position:absolute;inset:0;width:100%;height:100%;
+      object-fit:contain;background:#0e1012}
+  #lb .cap{display:flex;gap:12px;align-items:center;padding:12px 16px;color:#cfd6db;font-size:14px}
+  #lb .cap b{color:#fff;font-weight:600}
+  #lb .of{color:#8a949c;font-size:13px}
+  #lb .nav{margin-left:auto;display:flex;gap:8px}
+  #lb .nav button,#lb .close{appearance:none;border:0;background:#22282d;color:#fff;
+      font:600 13px/1 inherit;padding:9px 14px;border-radius:6px;cursor:pointer}
+  #lb .nav button:hover,#lb .close:hover{background:var(--cyan)}
+  #lb .nav button[disabled]{opacity:.35;cursor:default}
+  #lb .nav button[disabled]:hover{background:#22282d}
+
+  @media (max-width:640px){
+    .wrap{padding:4px 14px 32px}
+    .grid{gap:18px;grid-template-columns:1fr}
+    .bar{padding:10px 0 16px}
+    .count{width:100%;margin:4px 0 0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bar" id="bar" hidden></div>
+  <div class="grid" id="grid">
+    <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+  </div>
+  <div class="state" id="state" hidden></div>
+</div>
+
+<dialog id="lb">
+  <div class="shell">
+    <div class="stage" id="lbStage"></div>
+    <div class="cap"><b id="lbTitle"></b><span id="lbDate"></span><span class="of" id="lbOf"></span>
+      <span class="nav">
+        <button type="button" id="lbPrev" aria-label="Previous photo">‹ Prev</button>
+        <button type="button" id="lbNext" aria-label="Next photo">Next ›</button>
+      </span>
+      <button class="close" id="lbClose">Close</button></div>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  "use strict";
+
+  var FEED = "gallery.json";
+  var grid = document.getElementById("grid");
+  var bar = document.getElementById("bar");
+  var state = document.getElementById("state");
+  var lb = document.getElementById("lb");
+  var data = { items: [], services: [] };
+  var filter = "All";
+
+  /* ---------- height reporting, so the site embed has no inner scrollbar ---------- */
+  var lastH = 0;
+  function reportHeight() {
+    var h = Math.ceil(document.documentElement.scrollHeight);
+    if (Math.abs(h - lastH) > 8) {
+      lastH = h;
+      try { parent.postMessage({ hfcsPortfolioHeight: h }, "*"); } catch (e) {}
+    }
+  }
+  window.addEventListener("resize", reportHeight);
+  setInterval(reportHeight, 700);
+
+  /* ---------- before/after slider ---------- */
+  function slider(pair, opts) {
+    opts = opts || {};
+    var el = document.createElement("div");
+    el.className = "ba";
+    el.style.setProperty("--x", "50%");
+
+    var before = new Image();
+    before.src = opts.full ? pair.before.src : pair.before.thumb;
+    before.alt = "Before";
+    before.loading = "lazy";
+    before.decoding = "async";
+
+    var after = new Image();
+    after.className = "after";
+    after.src = opts.full ? pair.after.src : pair.after.thumb;
+    after.alt = "After";
+    after.loading = "lazy";
+    after.decoding = "async";
+
+    var handle = document.createElement("div"); handle.className = "handle";
+    var knob = document.createElement("div"); knob.className = "knob";
+    var tb = document.createElement("span"); tb.className = "tag b"; tb.textContent = "Before";
+    var ta = document.createElement("span"); ta.className = "tag a"; ta.textContent = "After";
+
+    el.append(before, after, handle, knob, tb, ta);
+
+    var dragging = false;
+    function move(clientX) {
+      var r = el.getBoundingClientRect();
+      var pct = ((clientX - r.left) / r.width) * 100;
+      pct = Math.max(0, Math.min(100, pct));
+      el.style.setProperty("--x", pct.toFixed(2) + "%");
+    }
+    el.addEventListener("pointerdown", function (e) {
+      // let the "View larger" button receive its own click
+      if (e.target.closest && e.target.closest(".expand")) return;
+      dragging = true; el.setPointerCapture(e.pointerId); move(e.clientX);
+    });
+    el.addEventListener("pointermove", function (e) { if (dragging) move(e.clientX); });
+    el.addEventListener("pointerup", function () { dragging = false; });
+    el.addEventListener("pointercancel", function () { dragging = false; });
+    // hover-to-reveal on a mouse, so the effect is discoverable without dragging
+    el.addEventListener("mousemove", function (e) { if (!dragging && e.buttons === 0) move(e.clientX); });
+    el.addEventListener("mouseleave", function () {
+      if (!dragging) el.style.setProperty("--x", "50%");
+    });
+    return el;
+  }
+
+  /* ---------- lightbox ---------- */
+  var lbItem = null, lbSlides = [], lbAt = 0;
+
+  function slidesFor(item) {
+    var out = (item.pairs || []).map(function (p) { return { kind: "pair", data: p }; });
+    (item.extras || []).forEach(function (m) { out.push({ kind: "one", data: m }); });
+    return out;
+  }
+
+  function paintSlide() {
+    var stage = document.getElementById("lbStage");
+    stage.innerHTML = "";
+    var s = lbSlides[lbAt];
+    if (!s) return;
+    if (s.kind === "pair") {
+      stage.appendChild(slider(s.data, { full: true }));
+    } else {
+      var img = new Image();
+      img.src = s.data.src; img.alt = lbItem.title || lbItem.service;
+      img.style.cssText = "width:100%;height:100%;object-fit:contain";
+      stage.appendChild(img);
+    }
+    var many = lbSlides.length > 1;
+    document.getElementById("lbOf").textContent = many ? (lbAt + 1) + " of " + lbSlides.length : "";
+    document.getElementById("lbPrev").disabled = !many || lbAt === 0;
+    document.getElementById("lbNext").disabled = !many || lbAt === lbSlides.length - 1;
+  }
+
+  function openLightbox(item, index) {
+    lbItem = item;
+    lbSlides = slidesFor(item);
+    lbAt = Math.max(0, Math.min(index || 0, lbSlides.length - 1));
+    document.getElementById("lbTitle").textContent = item.title || item.service;
+    document.getElementById("lbDate").textContent = item.date ? prettyDate(item.date) : "";
+    paintSlide();
+    if (typeof lb.showModal === "function") lb.showModal();
+  }
+
+  function step(n) {
+    if (!lbSlides.length) return;
+    lbAt = Math.max(0, Math.min(lbAt + n, lbSlides.length - 1));
+    paintSlide();
+  }
+  document.getElementById("lbPrev").addEventListener("click", function () { step(-1); });
+  document.getElementById("lbNext").addEventListener("click", function () { step(1); });
+  document.getElementById("lbClose").addEventListener("click", function () { lb.close(); });
+  lb.addEventListener("click", function (e) { if (e.target === lb) lb.close(); });
+  lb.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
+    if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
+  });
+
+  /* ---------- rendering ---------- */
+  function prettyDate(iso) {
+    var p = String(iso).split("-");
+    if (p.length !== 3) return "";
+    var months = ["January","February","March","April","May","June","July",
+                  "August","September","October","November","December"];
+    var m = months[parseInt(p[1], 10) - 1];
+    return m ? m + " " + parseInt(p[2], 10) + ", " + p[0] : "";
+  }
+
+  function card(item) {
+    var el = document.createElement("article");
+    el.className = "card";
+
+    if (item.pairs && item.pairs.length) {
+      var s = slider(item.pairs[0]);
+      var btn = document.createElement("button");
+      btn.className = "expand"; btn.type = "button"; btn.textContent = "View larger";
+      btn.addEventListener("click", function (e) { e.stopPropagation(); openLightbox(item, 0); });
+      s.appendChild(btn);
+      el.appendChild(s);
+    } else if (item.extras && item.extras.length) {
+      var wrap = document.createElement("div");
+      wrap.className = "single";
+      var img = new Image();
+      img.src = item.extras[0].thumb; img.alt = item.title;
+      img.loading = "lazy"; img.decoding = "async";
+      wrap.appendChild(img);
+      wrap.addEventListener("click", function () { openLightbox(item, 0); });
+      el.appendChild(wrap);
+    }
+
+    var meta = document.createElement("div");
+    meta.className = "meta";
+    var svc = document.createElement("span"); svc.className = "svc"; svc.textContent = item.service;
+    var t = document.createElement("h3"); t.className = "title";
+    t.textContent = item.title && item.title !== item.service ? item.title : shotLine(item);
+    meta.append(svc, t);
+    if (item.date) {
+      var d = document.createElement("p"); d.className = "date"; d.textContent = prettyDate(item.date);
+      meta.appendChild(d);
+    }
+    el.appendChild(meta);
+    return el;
+  }
+
+  function shotLine(item) {
+    var n = (item.pairs || []).length, x = (item.extras || []).length;
+    if (n > 1) return n + " before-and-after sets";
+    if (n === 1) return x ? "Before and after, plus " + x + " more" : "Before and after";
+    return x > 1 ? x + " photos" : "Completed job";
+  }
+
+  function render() {
+    var items = data.items.filter(function (i) {
+      return filter === "All" || i.service === filter;
+    });
+    grid.innerHTML = "";
+    if (!items.length) {
+      state.hidden = false;
+      state.innerHTML = "<h2>Nothing here yet</h2><p>New before-and-after photos are added as jobs are completed.</p>";
+      reportHeight();
+      return;
+    }
+    state.hidden = true;
+    var frag = document.createDocumentFragment();
+    items.forEach(function (i) { frag.appendChild(card(i)); });
+    grid.appendChild(frag);
+    var c = document.querySelector(".count");
+    if (c) c.textContent = items.length + (items.length === 1 ? " job shown" : " jobs shown");
+    reportHeight();
+  }
+
+  function buildBar() {
+    if (data.services.length < 2) { bar.hidden = true; return; }
+    bar.hidden = false;
+    bar.innerHTML = "";
+    ["All"].concat(data.services).forEach(function (name) {
+      var b = document.createElement("button");
+      b.className = "chip"; b.type = "button"; b.textContent = name;
+      b.setAttribute("aria-pressed", String(name === filter));
+      b.addEventListener("click", function () {
+        filter = name;
+        bar.querySelectorAll(".chip").forEach(function (x) {
+          x.setAttribute("aria-pressed", String(x.textContent === filter));
+        });
+        render();
+      });
+      bar.appendChild(b);
+    });
+    var c = document.createElement("span"); c.className = "count";
+    bar.appendChild(c);
+  }
+
+  fetch(FEED + "?v=" + Date.now(), { cache: "no-store" })
+    .then(function (r) {
+      if (!r.ok) throw new Error("feed " + r.status);
+      return r.json();
+    })
+    .then(function (j) {
+      data = j;
+      buildBar();
+      render();
+    })
+    .catch(function () {
+      grid.innerHTML = "";
+      state.hidden = false;
+      state.innerHTML = "<h2>Gallery is loading</h2><p>If this stays here, the photo feed could not be reached. Please refresh.</p>";
+      reportHeight();
+    });
+})();
+</script>
+</body>
+</html>
