@@ -58,7 +58,8 @@ create anything, upload anything, or type any commands. GitHub Desktop just has 
      site from a public repository, so if this stays checked the gallery will never load.
 5. Click **Publish repository**. It takes a few seconds.
 
-You now have `github.com/YOURUSERNAME/hfcs-portfolio`. Write that username down — Step 7 needs it.
+You now have `github.com/HFCS2026/hfcs-portfolio`, and the gallery will be served at
+`https://hfcs2026.github.io/hfcs-portfolio/`.
 
 > **If GitHub Desktop says the folder "does not appear to be a Git repository":** something
 > removed the hidden `.git` folder. Tell me and I'll rebuild it — don't create a new repository
@@ -76,7 +77,7 @@ You now have `github.com/YOURUSERNAME/hfcs-portfolio`. Write that username down 
 3. Branch: **main**, folder: **/docs**. Click **Save**.
 4. Wait about a minute, then refresh. GitHub shows your live address:
 
-   `https://YOURUSERNAME.github.io/hfcs-portfolio/`
+   `https://hfcs2026.github.io/hfcs-portfolio/`
 
    Open it. You will see the gallery frame with a "Nothing here yet" message, or the sample
    photos if the sample feed is still in place. Either way, if the page loads, Step 2 worked.
@@ -192,8 +193,7 @@ Your portfolio page becomes one embedded gallery, replacing the hand-built secti
 4. Add a widget: look for **HTML**, **Embed**, or **Custom Code** in the widget list.
    Drag it onto the page where the galleries were, and make it **full width**.
 5. Open `embed-for-tailorbrands.html`, copy the whole thing, and paste it into the widget.
-6. **Change `YOURUSERNAME` to your GitHub username** — it appears once, in the `src=` line.
-   Everything else stays as-is.
+6. **Nothing to change in it** — your address is already baked in.
 7. Do **not** set a fixed height on the widget. The gallery reports its own height and the
    snippet resizes the frame to match.
 8. Delete the old gallery sections, keep your page heading and the Book Now / Contact
@@ -265,8 +265,8 @@ a check-in — that also means no before photo and no walkthrough record if ther
 damage claim.
 
 **The gallery frame is empty on the website but works at the GitHub Pages address.**
-The `YOURUSERNAME` in the embed snippet was not replaced, or the widget got a fixed height
-of 0. Recheck Step 7 items 6 and 7.
+The widget got a fixed height of 0, or the snippet was pasted into a text block instead of an
+HTML/Embed widget. Recheck Step 7 items 4 and 7.
 
 **Photos look sideways.**
 They will not — the sync reads the phone's rotation tag and bakes the rotation in before
