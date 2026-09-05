@@ -40,33 +40,22 @@ You do not need to write any code. Every step below is copy, paste, or click.
 
 ---
 
-## Step 1 — Publish the repository with GitHub Desktop
+## Step 1 — Create the GitHub repository
 
-**This folder is already a git repository with the first commit made.** You do not have to
-create anything, upload anything, or type any commands. GitHub Desktop just has to publish it.
+1. Sign in to GitHub, click the **+** at the top right, choose **New repository**.
+2. Repository name: `hfcs-portfolio`
+3. Set it to **Public**. (It has to be public for GitHub Pages to serve the photos free.
+   Only approved job photos ever land in it — no customer names, no addresses.)
+4. Leave everything else alone and click **Create repository**.
+5. On the next screen click **uploading an existing file**.
+6. Drag in *everything* from the `Portfolio Automation` folder — `sync_portfolio.py`,
+   `requirements.txt`, the `docs` folder, the `seed` folder, and the `.github` folder.
+   Then click **Commit changes**.
 
-1. Open **GitHub Desktop** and sign in with the account you created, if it asks.
-2. **File → Add Local Repository…**
-3. Choose this folder:
-   `Documents / Claude / Projects / Happy Family Cleaning Solutions Success Plan / Website Assets / Portfolio Automation`
-   It should open showing **No local changes** and one commit in History — that is correct, it
-   means everything is already staged and saved.
-4. Click **Publish repository** in the top bar.
-   - **Name:** `hfcs-portfolio`
-   - **Description:** optional
-   - **UNCHECK "Keep this code private."** ← this one matters. GitHub Pages only serves a free
-     site from a public repository, so if this stays checked the gallery will never load.
-5. Click **Publish repository**. It takes a few seconds.
-
-You now have `github.com/HFCS2026/hfcs-portfolio`, and the gallery will be served at
-`https://hfcs2026.github.io/hfcs-portfolio/`.
-
-> **If GitHub Desktop says the folder "does not appear to be a Git repository":** something
-> removed the hidden `.git` folder. Tell me and I'll rebuild it — don't create a new repository
-> by hand, because the workflow file lives in a hidden folder the web uploader tends to skip.
-
-> This folder lives in Documents. If Documents is synced to iCloud and GitHub Desktop ever
-> complains about a locked or busy file, that is why — it clears on a retry.
+> If GitHub's web uploader skips the `.github` folder (some browsers hide folders starting
+> with a dot), create it by hand: **Add file → Create new file**, and for the filename type
+> `.github/workflows/sync-portfolio.yml` — typing the slashes makes the folders. Then paste
+> in the contents of that file.
 
 ---
 
@@ -77,7 +66,7 @@ You now have `github.com/HFCS2026/hfcs-portfolio`, and the gallery will be serve
 3. Branch: **main**, folder: **/docs**. Click **Save**.
 4. Wait about a minute, then refresh. GitHub shows your live address:
 
-   `https://hfcs2026.github.io/hfcs-portfolio/`
+   `https://YOURUSERNAME.github.io/hfcs-portfolio/`
 
    Open it. You will see the gallery frame with a "Nothing here yet" message, or the sample
    photos if the sample feed is still in place. Either way, if the page loads, Step 2 worked.
@@ -152,15 +141,23 @@ That "Held back" list is your to-do list. Every line tells you what is missing.
 
 ## Step 6 — The daily habit (this is the whole approval step)
 
-**Starring a closeout is what publishes a job.** One click, in a tool you already use.
+**Approving a closeout is what publishes a job.** There are two ways to do it and either one
+works — use whichever you find faster.
 
 1. Open the **HFCS Job Closeout Checklist** in Jotform → **Submissions**.
 2. Look at the After Pictures on a new submission.
-3. If it makes us look good, click the **star / flag** icon on that submission.
-4. That is it. Within 3 hours it is on the website.
+3. If it makes us look good, approve it:
+   - **Click the star / flag icon** on the submission, **or**
+   - **Type `#portfolio` anywhere in that submission's Notes / Comments.**
+4. Within 3 hours it is on the website.
 
-Made a mistake, or a customer changes their mind? **Un-star it.** The next sync pulls it
-back off the site and deletes the image files. Nothing is permanent.
+**Use `#portfolio` if the star doesn't seem to take.** The star depends on Jotform passing its
+flag through to the API, which it does not always do. The keyword is plain text the API always
+returns, so it is the one that is guaranteed to work. To undo it, delete the keyword.
+
+**`NO PHOTOS` in the Notes beats everything.** If a customer asked us not to use their photos,
+that job never publishes, even if someone stars it by mistake. The inspection photos stay in
+Jotform as the damage record and go nowhere else.
 
 What to star, in order of how much they sell:
 
@@ -172,14 +169,20 @@ What to star, in order of how much they sell:
 4. Routine recurring cleans — star occasionally, for variety. A wall of spotless
    kitchens all looks the same.
 
-**Never star a job whose closeout Notes say `NO PHOTOS`.** That customer asked us not to use
-their photos, and the answer is always yes. Their inspection shots stay in Jotform as the damage
-record and go nowhere else.
+What never to approve: anything with a face, a mailbox number, a piece of mail, a prescription
+bottle, a family photo, a car tag, or a monitor with something readable on it. When in doubt,
+don't. The gallery already strips GPS coordinates out of every photo, but it cannot see what is
+in the frame — you can.
 
-What never to star otherwise: anything with a face, a mailbox number, a piece of mail, a prescription
-bottle, a family photo, a car tag, or a monitor with something readable on it. When in
-doubt, don't. The gallery already strips GPS coordinates out of every photo, but it cannot
-see what is in the frame — you can.
+### Checking a run without opening GitHub
+
+Every run publishes a small status file at
+**https://hfcs2026.github.io/hfcs-portfolio/status.json**
+
+It says how many walkthroughs and closeouts it read, how many paired up, and for each job
+whether it published and why not. It carries **no customer names and no photo links** — only
+dates, service types and reason codes — so it is safe sitting on a public address. Open it in a
+browser any time you want to know what the last run did.
 
 ---
 
@@ -193,7 +196,8 @@ Your portfolio page becomes one embedded gallery, replacing the hand-built secti
 4. Add a widget: look for **HTML**, **Embed**, or **Custom Code** in the widget list.
    Drag it onto the page where the galleries were, and make it **full width**.
 5. Open `embed-for-tailorbrands.html`, copy the whole thing, and paste it into the widget.
-6. **Nothing to change in it** — your address is already baked in.
+6. **Change `YOURUSERNAME` to your GitHub username** — it appears once, in the `src=` line.
+   Everything else stays as-is.
 7. Do **not** set a fixed height on the widget. The gallery reports its own height and the
    snippet resizes the frame to match.
 8. Delete the old gallery sections, keep your page heading and the Book Now / Contact
@@ -243,7 +247,9 @@ to change the defaults.
 
 | Name | Default | What it does |
 |---|---|---|
-| `PUBLISH_GATE` | `flag` | `flag` = star the closeout to publish. `field` = use a "Publish to website" question on the closeout form instead. `none` = publish anything with consent (not recommended). |
+| `PUBLISH_GATE` | `flag` | `flag` = star the closeout **or** put the approve keyword in its Notes. `field` = use a "Publish to website" question on the closeout form instead. `none` = publish every matched job (not recommended). |
+| `APPROVE_KEYWORD` | `#portfolio` | The word you type into the closeout Notes to approve a job. |
+| `BLOCK_KEYWORD` | `no photos` | Text in the Notes that blocks a job outright, whatever else says. Leave this alone. |
 | `REQUIRE_CONSENT` | `false` | Off, because photos are part of the standard inspection rather than a per-job ask. Only set it to `true` if a photo-release question is ever added back to the walkthrough form. |
 | `MAX_PAIR_DAYS` | `45` | How many days apart a walkthrough and its closeout can be and still count as the same job. Raise it for long cleanout projects. |
 | `PRE_FORM_ID` | `261183496401052` | Pre-Job Walkthrough form |
@@ -254,10 +260,15 @@ to change the defaults.
 ## Troubleshooting
 
 **A job I starred is not showing up.**
-Actions tab → open the newest run → read the "Held back" list. It names the reason. Nine
-times out of ten it is a customer-name spelling mismatch between the two forms — the
-walkthrough says "Dave Jones" and the closeout says "David Jones," so they never paired.
-Fix the spelling on either submission in Jotform and it pairs on the next run.
+Open **https://hfcs2026.github.io/hfcs-portfolio/status.json** — the `reason` line for that job
+says exactly what stopped it. Two common ones:
+
+- *"not approved"* with `"starred": false` — Jotform did not pass the star through to the API.
+  Type `#portfolio` in that submission's Notes instead; that always works.
+- The job is missing from the list entirely — the walkthrough and closeout never paired, almost
+  always a customer-name spelling difference between the two forms. Case doesn't matter
+  ("Diane Miles" and "Diane miles" pair fine), but "Dave" and "David" don't. Fix the spelling on
+  either submission in Jotform and it pairs on the next run.
 
 **"unmatched closeout" in the log.**
 A closeout with no walkthrough at all. The crew skipped the pre-job form. Worth raising at
@@ -265,8 +276,8 @@ a check-in — that also means no before photo and no walkthrough record if ther
 damage claim.
 
 **The gallery frame is empty on the website but works at the GitHub Pages address.**
-The widget got a fixed height of 0, or the snippet was pasted into a text block instead of an
-HTML/Embed widget. Recheck Step 7 items 4 and 7.
+The `YOURUSERNAME` in the embed snippet was not replaced, or the widget got a fixed height
+of 0. Recheck Step 7 items 6 and 7.
 
 **Photos look sideways.**
 They will not — the sync reads the phone's rotation tag and bakes the rotation in before
@@ -287,6 +298,7 @@ secret.
 | `.github/workflows/sync-portfolio.yml` | The every-3-hours schedule plus the manual Run button. |
 | `docs/index.html` | The gallery itself — sliders, service filters, lightbox. |
 | `docs/gallery.json` | Generated. The list of published jobs. Don't hand-edit. |
+| `docs/status.json` | Generated. What the last run did and why, with no customer names in it. |
 | `docs/images/` | Generated. Web-sized, GPS-stripped copies of the photos. |
 | `seed/` | Your pre-automation photos and the file that describes them. |
 | `embed-for-tailorbrands.html` | The snippet that goes on the portfolio page. |

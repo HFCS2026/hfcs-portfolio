@@ -10,10 +10,18 @@ gallery feed that happyfamilycleaningsolutions.com/portfolio reads.
     Pre-Job Walkthrough  ->  "Before Pictures"
     Job Closeout         ->  "After Pictures"
 
-NOTHING publishes unless an owner has starred (flagged) the Job Closeout submission
-in the Jotform inbox. That star is the only gate. Photos are taken on every job as part
-of the inspection process, so the control is at the CAMERA, not at a consent question --
-see "HFCS Photo Scope of Practice" for what crews may and may not photograph.
+NOTHING publishes unless an owner approves the job. There are two ways to approve,
+and either one works:
+
+  1. Star (flag) the Job Closeout submission in the Jotform inbox, OR
+  2. Put #portfolio anywhere in that submission's Notes / Comments field.
+
+The keyword is the reliable one -- it is plain text the API always returns. The star
+depends on Jotform exposing its flag through the API, which is not guaranteed.
+Writing NO PHOTOS in the Notes blocks a job outright, even if it is starred.
+
+Photos are taken on every job as part of the inspection process, so the control is at
+the CAMERA, not at a consent question -- see "Job Photo Standards & Word Tracks".
 
 Run it:
     python sync_portfolio.py --dry-run     # show what would publish, write nothing
@@ -51,6 +59,7 @@ DOCS = ROOT / "docs"
 IMAGES = DOCS / "images"
 SEED = ROOT / "seed"
 FEED = DOCS / "gallery.json"
+STATUS = DOCS / "status.json"
 
 API_KEY = os.environ.get("JOTFORM_API_KEY", "").strip()
 API_BASE = os.environ.get("JOTFORM_API_BASE", "https://api.jotform.com").rstrip("/")
@@ -58,10 +67,15 @@ PRE_FORM_ID = os.environ.get("PRE_FORM_ID", "261183496401052").strip()
 POST_FORM_ID = os.environ.get("POST_FORM_ID", "261183572696063").strip()
 
 # How the owner approves a job for the website.
-#   "flag"  -> star the Job Closeout submission in the Jotform inbox  (default)
+#   "flag"  -> star the closeout in Jotform, OR put #portfolio in its Notes  (default)
 #   "field" -> answer Yes to a "Publish to website" question on the closeout form
-#   "none"  -> publish everything that has consent (not recommended)
+#   "none"  -> publish every matched job (not recommended)
 PUBLISH_GATE = os.environ.get("PUBLISH_GATE", "flag").strip().lower()
+
+# The word an owner types into the closeout Notes to approve a job for the website,
+# and the word that blocks one no matter what else says.
+APPROVE_KEYWORD = os.environ.get("APPROVE_KEYWORD", "#portfolio").strip().lower()
+BLOCK_KEYWORD = os.environ.get("BLOCK_KEYWORD", "no photos").strip().lower()
 
 # Off by default: photos are part of the standard inspection process, not a per-job ask.
 # Set REQUIRE_CONSENT=true only if a photo-release question is ever added back to the
@@ -227,7 +241,8 @@ def read_submission(sub: dict, side: str) -> dict:
     return {
         "id": sub.get("id"),
         "side": side,
-        "flag": str(sub.get("flag", "0")) == "1",
+        "flag_raw": str(sub.get("flag", "")),
+        "flag": str(sub.get("flag", "0")).strip().lower() in ("1", "true", "yes"),
         "created": sub.get("created_at", ""),
         "customer": answer_text(find_answer(answers, "customer")),
         "date": parse_date(answer_text(find_answer(answers, "date")), sub.get("created_at", "")),
@@ -279,22 +294,41 @@ def pair_jobs(pres: list[dict], posts: list[dict]) -> tuple[list[dict], list[dic
 
 
 def gate_passes(job: dict) -> tuple[bool, str]:
+    """Decide whether one matched job may go on the website, and say why."""
     pre, post = job["pre"], job["post"]
+    notes = " ".join([post["notes"], pre["notes"]]).lower()
 
-    if PUBLISH_GATE == "flag" and not post["flag"]:
-        return False, "closeout not starred in Jotform"
-    if PUBLISH_GATE == "field" and not says_yes(post["publish"]):
-        return False, "closeout 'publish to website' is not Yes"
+    # A customer asked us not to use their photos. This beats everything else.
+    if BLOCK_KEYWORD and BLOCK_KEYWORD in notes:
+        return False, f"notes say '{BLOCK_KEYWORD}' — customer opted out"
+
+    if PUBLISH_GATE == "field":
+        if not says_yes(post["publish"]):
+            return False, "closeout 'publish to website' is not Yes"
+    elif PUBLISH_GATE != "none":
+        starred = post["flag"]
+        keyworded = bool(APPROVE_KEYWORD) and APPROVE_KEYWORD in notes
+        if not (starred or keyworded):
+            return False, (f"not approved — star the closeout in Jotform, "
+                           f"or put {APPROVE_KEYWORD} in its Notes")
 
     if REQUIRE_CONSENT:
-        if not pre["consent"]:
-            return False, "no photo-release answer on the walkthrough"
         if not says_yes(pre["consent"]):
-            return False, "customer did not OK photos"
+            return False, "no photo release on the walkthrough"
 
-    if not pre["photos"] and not post["photos"]:
-        return False, "no photos attached"
+    if not pre["photos"] or not post["photos"]:
+        return False, "needs both before and after photos"
     return True, ""
+
+
+def approval_source(job: dict) -> str:
+    post = job["post"]
+    notes = " ".join([post["notes"], job["pre"]["notes"]]).lower()
+    if post["flag"]:
+        return "starred in Jotform"
+    if APPROVE_KEYWORD and APPROVE_KEYWORD in notes:
+        return f"{APPROVE_KEYWORD} in notes"
+    return "gate disabled"
 
 
 # --------------------------------------------------------------------------
@@ -457,6 +491,45 @@ def write_feed(items: list[dict]) -> None:
         log(f"Cleaned up {removed} unused image files.")
 
 
+def write_status(pres, posts, jobs, orphans, decided) -> None:
+    """A small, name-free diagnostic file published beside the gallery.
+
+    It exists so the run can be checked without opening the Actions log. It
+    deliberately carries NO customer names and NO photo URLs — only dates,
+    service types, counts and the reason each job was or was not published.
+    """
+    rows = []
+    for job, ok, why in decided:
+        post, pre = job["post"], job["pre"]
+        rows.append({
+            "ref": str(post["id"])[-6:],
+            "date": post["date"] or pre["date"],
+            "service": norm_service(pre["service"]),
+            "before_photos": len(pre["photos"]),
+            "after_photos": len(post["photos"]),
+            "starred": post["flag"],
+            "flag_raw": post.get("flag_raw", ""),
+            "published": ok,
+            "reason": why or approval_source(job),
+        })
+    STATUS.write_text(json.dumps({
+        "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "gate": PUBLISH_GATE,
+        "approve_keyword": APPROVE_KEYWORD,
+        "require_consent": REQUIRE_CONSENT,
+        "counts": {
+            "walkthroughs": len(pres),
+            "closeouts": len(posts),
+            "matched": len(jobs),
+            "unmatched_closeouts": len(orphans),
+            "published": sum(1 for _, ok, _ in decided if ok),
+            "held": sum(1 for _, ok, _ in decided if not ok),
+        },
+        "jobs": rows,
+    }, indent=1))
+    log(f"Wrote {STATUS.relative_to(ROOT)} (no names in it — safe to be public).")
+
+
 def iter_media(item: dict):
     for p in item.get("pairs", []):
         yield p["before"]; yield p["after"]
@@ -532,17 +605,18 @@ def main() -> None:
     for o in orphans:
         log(f"  unmatched closeout: {o['customer'] or '(no name)'} {o['date']}")
 
-    approved, held = [], []
-    for job in jobs:
-        ok, why = gate_passes(job)
-        (approved if ok else held).append((job, why))
+    decided = [(job, *gate_passes(job)) for job in jobs]
+    approved = [(j, w) for j, ok, w in decided if ok]
+    held = [(j, w) for j, ok, w in decided if not ok]
 
     log(f"\nApproved for the website: {len(approved)}")
     for job, _ in approved:
-        log(f"  + {job['post']['customer']} — {norm_service(job['pre']['service'])} — {job['post']['date']}")
+        log(f"  + {job['post']['customer']} — {norm_service(job['pre']['service'])} — "
+            f"{job['post']['date']} — approved by: {approval_source(job)}")
     log(f"Held back: {len(held)}")
     for job, why in held:
         log(f"  - {job['post']['customer'] or '(no name)'} {job['post']['date']}: {why}")
+        log(f"      (raw flag value Jotform returned: {job['post'].get('flag_raw', '')!r})")
 
     if args.dry_run:
         log("\nDry run — nothing downloaded, nothing written.")
@@ -551,6 +625,7 @@ def main() -> None:
     items = [i for i in (build_item(j) for j, _ in approved) if i]
     items += load_seed()
     write_feed(items)
+    write_status(pres, posts, jobs, orphans, decided)
 
 
 if __name__ == "__main__":
