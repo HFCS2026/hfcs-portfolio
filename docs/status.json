@@ -1,0 +1,27 @@
+{
+ "generated": "2026-09-05T00:22:04+00:00",
+ "gate": "flag",
+ "approve_keyword": "#portfolio",
+ "require_consent": true,
+ "counts": {
+  "walkthroughs": 3,
+  "closeouts": 1,
+  "matched": 1,
+  "unmatched_closeouts": 0,
+  "published": 0,
+  "held": 1
+ },
+ "jobs": [
+  {
+   "ref": "730959",
+   "date": "2026-07-31",
+   "service": "Junk Removal",
+   "before_photos": 2,
+   "after_photos": 4,
+   "starred": true,
+   "flag_raw": "1",
+   "published": false,
+   "reason": "no photo release on the walkthrough"
+  }
+ ]
+}
