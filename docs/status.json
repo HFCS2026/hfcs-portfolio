@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-05T00:46:52+00:00",
+ "generated": "2026-09-05T01:03:27+00:00",
  "gate": "flag",
  "approve_keyword": "#portfolio",
  "require_consent": false,
@@ -8,8 +8,8 @@
   "closeouts": 5,
   "matched": 5,
   "unmatched_closeouts": 0,
-  "published": 3,
-  "held": 2
+  "published": 5,
+  "held": 0
  },
  "jobs": [
   {
@@ -29,10 +29,10 @@
    "service": "House Cleaning",
    "before_photos": 12,
    "after_photos": 7,
-   "starred": false,
-   "flag_raw": "0",
-   "published": false,
-   "reason": "not approved \u2014 star the closeout in Jotform, or put #portfolio in its Notes"
+   "starred": true,
+   "flag_raw": "1",
+   "published": true,
+   "reason": "starred in Jotform"
   },
   {
    "ref": "468459",
@@ -40,16 +40,16 @@
    "service": "House Cleaning",
    "before_photos": 11,
    "after_photos": 10,
-   "starred": false,
-   "flag_raw": "0",
-   "published": false,
-   "reason": "not approved \u2014 star the closeout in Jotform, or put #portfolio in its Notes"
+   "starred": true,
+   "flag_raw": "1",
+   "published": true,
+   "reason": "starred in Jotform"
   },
   {
    "ref": "321745",
    "date": "2026-09-03",
    "service": "House Cleaning",
-   "before_photos": 14,
+   "before_photos": 12,
    "after_photos": 12,
    "starred": true,
    "flag_raw": "1",
