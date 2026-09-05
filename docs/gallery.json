@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-05T01:44:04+00:00",
+ "generated": "2026-09-05T02:43:40+00:00",
  "count": 5,
  "services": [
   "House Cleaning",
@@ -346,24 +346,6 @@
     {
      "src": "images/2cc130459231.jpg",
      "thumb": "images/2cc130459231_t.jpg",
-     "w": 1200,
-     "h": 1600
-    },
-    {
-     "src": "images/3cc8d26b9a64.jpg",
-     "thumb": "images/3cc8d26b9a64_t.jpg",
-     "w": 1200,
-     "h": 1600
-    },
-    {
-     "src": "images/a3b49d4afe8b.jpg",
-     "thumb": "images/a3b49d4afe8b_t.jpg",
-     "w": 1200,
-     "h": 1600
-    },
-    {
-     "src": "images/9b43d02c3fa2.jpg",
-     "thumb": "images/9b43d02c3fa2_t.jpg",
      "w": 1200,
      "h": 1600
     },

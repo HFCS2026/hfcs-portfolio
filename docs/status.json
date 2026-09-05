@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-05T01:44:04+00:00",
+ "generated": "2026-09-05T02:43:40+00:00",
  "gate": "flag",
  "approve_keyword": "#portfolio",
  "require_consent": false,
@@ -38,7 +38,7 @@
    "ref": "468459",
    "date": "2026-08-27",
    "service": "House Cleaning",
-   "before_photos": 11,
+   "before_photos": 8,
    "after_photos": 10,
    "starred": true,
    "flag_raw": "1",
