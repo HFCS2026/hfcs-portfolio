@@ -15,7 +15,7 @@
     title="Happy Family Cleaning Solutions — recent work"
     loading="lazy"
     scrolling="no"
-    style="width:100%;height:1400px;border:0;display:block;overflow:hidden"></iframe>
+    style="width:100%;height:900px;border:0;display:block;overflow:hidden"></iframe>
 </div>
 
 <script>
@@ -24,7 +24,8 @@
   window.addEventListener("message", function (e) {
     if (!e.data || typeof e.data.hfcsPortfolioHeight !== "number") return;
     if (frame.contentWindow !== e.source) return;
-    frame.style.height = (e.data.hfcsPortfolioHeight + 24) + "px";
+    // set it exactly — adding padding here is what makes the frame grow forever
+    frame.style.height = e.data.hfcsPortfolioHeight + "px";
   });
 })();
 </script>
