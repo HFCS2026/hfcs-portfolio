@@ -1,8 +1,9 @@
 {
- "generated": "2026-09-05T00:38:20+00:00",
- "count": 2,
+ "generated": "2026-09-05T00:46:34+00:00",
+ "count": 3,
  "services": [
-  "House Cleaning"
+  "House Cleaning",
+  "Junk Removal"
  ],
  "items": [
   {
@@ -11,121 +12,105 @@
    "date": "2026-09-04",
    "title": "House Cleaning",
    "caption": "",
-   "pairs": [
+   "before": [
     {
-     "before": {
-      "src": "images/20b2a65ed026.jpg",
-      "thumb": "images/20b2a65ed026_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/d1b38a169005.jpg",
-      "thumb": "images/d1b38a169005_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/20b2a65ed026.jpg",
+     "thumb": "images/20b2a65ed026_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/ec174eabe53b.jpg",
-      "thumb": "images/ec174eabe53b_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/9140a1fea77f.jpg",
-      "thumb": "images/9140a1fea77f_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/ec174eabe53b.jpg",
+     "thumb": "images/ec174eabe53b_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/de5132af252d.jpg",
-      "thumb": "images/de5132af252d_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/8de7477cf998.jpg",
-      "thumb": "images/8de7477cf998_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/de5132af252d.jpg",
+     "thumb": "images/de5132af252d_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/0d19b1efa822.jpg",
-      "thumb": "images/0d19b1efa822_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/3365141d7118.jpg",
-      "thumb": "images/3365141d7118_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/0d19b1efa822.jpg",
+     "thumb": "images/0d19b1efa822_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/dff35dccf0e7.jpg",
-      "thumb": "images/dff35dccf0e7_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/9361197e5487.jpg",
-      "thumb": "images/9361197e5487_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/dff35dccf0e7.jpg",
+     "thumb": "images/dff35dccf0e7_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/9211081cd67a.jpg",
-      "thumb": "images/9211081cd67a_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/dddb46ad8869.jpg",
-      "thumb": "images/dddb46ad8869_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/9211081cd67a.jpg",
+     "thumb": "images/9211081cd67a_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/6ed83c1612fa.jpg",
-      "thumb": "images/6ed83c1612fa_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/db5df0243710.jpg",
-      "thumb": "images/db5df0243710_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/6ed83c1612fa.jpg",
+     "thumb": "images/6ed83c1612fa_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/bdcf30a790e8.jpg",
-      "thumb": "images/bdcf30a790e8_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/e868c1ac0157.jpg",
-      "thumb": "images/e868c1ac0157_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/bdcf30a790e8.jpg",
+     "thumb": "images/bdcf30a790e8_t.jpg",
+     "w": 1200,
+     "h": 1600
     }
    ],
-   "extras": [
+   "after": [
+    {
+     "src": "images/d1b38a169005.jpg",
+     "thumb": "images/d1b38a169005_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/9140a1fea77f.jpg",
+     "thumb": "images/9140a1fea77f_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/8de7477cf998.jpg",
+     "thumb": "images/8de7477cf998_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/3365141d7118.jpg",
+     "thumb": "images/3365141d7118_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/9361197e5487.jpg",
+     "thumb": "images/9361197e5487_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/dddb46ad8869.jpg",
+     "thumb": "images/dddb46ad8869_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/db5df0243710.jpg",
+     "thumb": "images/db5df0243710_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/e868c1ac0157.jpg",
+     "thumb": "images/e868c1ac0157_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
     {
      "src": "images/70e5e590c41b.jpg",
      "thumb": "images/70e5e590c41b_t.jpg",
@@ -165,177 +150,79 @@
    "date": "2026-09-03",
    "title": "House Cleaning",
    "caption": "",
-   "pairs": [
+   "before": [
     {
-     "before": {
-      "src": "images/d75c40529d44.jpg",
-      "thumb": "images/d75c40529d44_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/b656c32d228d.jpg",
-      "thumb": "images/b656c32d228d_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/d75c40529d44.jpg",
+     "thumb": "images/d75c40529d44_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/36e10d9139ee.jpg",
-      "thumb": "images/36e10d9139ee_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/90b2c0687867.jpg",
-      "thumb": "images/90b2c0687867_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/36e10d9139ee.jpg",
+     "thumb": "images/36e10d9139ee_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/9c377390cb5e.jpg",
-      "thumb": "images/9c377390cb5e_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/f5d10aeaed88.jpg",
-      "thumb": "images/f5d10aeaed88_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/9c377390cb5e.jpg",
+     "thumb": "images/9c377390cb5e_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/dd213d8750fd.jpg",
-      "thumb": "images/dd213d8750fd_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/58f0d515cc2a.jpg",
-      "thumb": "images/58f0d515cc2a_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/dd213d8750fd.jpg",
+     "thumb": "images/dd213d8750fd_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/7ff0d074b2fa.jpg",
-      "thumb": "images/7ff0d074b2fa_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/b86872c65857.jpg",
-      "thumb": "images/b86872c65857_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/7ff0d074b2fa.jpg",
+     "thumb": "images/7ff0d074b2fa_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/6e75e18d6a05.jpg",
-      "thumb": "images/6e75e18d6a05_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/754d9a51d8e4.jpg",
-      "thumb": "images/754d9a51d8e4_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/6e75e18d6a05.jpg",
+     "thumb": "images/6e75e18d6a05_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/2eadebef4b1a.jpg",
-      "thumb": "images/2eadebef4b1a_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/bcd3bbc8f68e.jpg",
-      "thumb": "images/bcd3bbc8f68e_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/2eadebef4b1a.jpg",
+     "thumb": "images/2eadebef4b1a_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/6b59da294dc8.jpg",
-      "thumb": "images/6b59da294dc8_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/54fafb103614.jpg",
-      "thumb": "images/54fafb103614_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/6b59da294dc8.jpg",
+     "thumb": "images/6b59da294dc8_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/658d4ddcb4bf.jpg",
-      "thumb": "images/658d4ddcb4bf_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/bc12afa80d8d.jpg",
-      "thumb": "images/bc12afa80d8d_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/658d4ddcb4bf.jpg",
+     "thumb": "images/658d4ddcb4bf_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/75b1b60ff91f.jpg",
-      "thumb": "images/75b1b60ff91f_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/dc2492bc8bc5.jpg",
-      "thumb": "images/dc2492bc8bc5_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/75b1b60ff91f.jpg",
+     "thumb": "images/75b1b60ff91f_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/84d5e52144d4.jpg",
-      "thumb": "images/84d5e52144d4_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/553228437c71.jpg",
-      "thumb": "images/553228437c71_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
+     "src": "images/84d5e52144d4.jpg",
+     "thumb": "images/84d5e52144d4_t.jpg",
+     "w": 1200,
+     "h": 1600
     },
     {
-     "before": {
-      "src": "images/223bc07e837c.jpg",
-      "thumb": "images/223bc07e837c_t.jpg",
-      "w": 1200,
-      "h": 1600
-     },
-     "after": {
-      "src": "images/0c5db0256884.jpg",
-      "thumb": "images/0c5db0256884_t.jpg",
-      "w": 1200,
-      "h": 1600
-     }
-    }
-   ],
-   "extras": [
+     "src": "images/223bc07e837c.jpg",
+     "thumb": "images/223bc07e837c_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
     {
      "src": "images/377b94068bd0.jpg",
      "thumb": "images/377b94068bd0_t.jpg",
@@ -345,6 +232,128 @@
     {
      "src": "images/7f2a9af66885.jpg",
      "thumb": "images/7f2a9af66885_t.jpg",
+     "w": 1200,
+     "h": 1600
+    }
+   ],
+   "after": [
+    {
+     "src": "images/b656c32d228d.jpg",
+     "thumb": "images/b656c32d228d_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/90b2c0687867.jpg",
+     "thumb": "images/90b2c0687867_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/f5d10aeaed88.jpg",
+     "thumb": "images/f5d10aeaed88_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/58f0d515cc2a.jpg",
+     "thumb": "images/58f0d515cc2a_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/b86872c65857.jpg",
+     "thumb": "images/b86872c65857_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/754d9a51d8e4.jpg",
+     "thumb": "images/754d9a51d8e4_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/bcd3bbc8f68e.jpg",
+     "thumb": "images/bcd3bbc8f68e_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/54fafb103614.jpg",
+     "thumb": "images/54fafb103614_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/bc12afa80d8d.jpg",
+     "thumb": "images/bc12afa80d8d_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/dc2492bc8bc5.jpg",
+     "thumb": "images/dc2492bc8bc5_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/553228437c71.jpg",
+     "thumb": "images/553228437c71_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/0c5db0256884.jpg",
+     "thumb": "images/0c5db0256884_t.jpg",
+     "w": 1200,
+     "h": 1600
+    }
+   ],
+   "source": "jotform"
+  },
+  {
+   "id": "jf-6613515422018730959",
+   "service": "Junk Removal",
+   "date": "2026-07-31",
+   "title": "Junk Removal",
+   "caption": "",
+   "before": [
+    {
+     "src": "images/c8dfc777e59e.jpg",
+     "thumb": "images/c8dfc777e59e_t.jpg",
+     "w": 1600,
+     "h": 1200
+    },
+    {
+     "src": "images/542630584cbb.jpg",
+     "thumb": "images/542630584cbb_t.jpg",
+     "w": 1200,
+     "h": 1600
+    }
+   ],
+   "after": [
+    {
+     "src": "images/a6f71bb63a93.jpg",
+     "thumb": "images/a6f71bb63a93_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/f7fb2be99941.jpg",
+     "thumb": "images/f7fb2be99941_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/36e8623e353e.jpg",
+     "thumb": "images/36e8623e353e_t.jpg",
+     "w": 1200,
+     "h": 1600
+    },
+    {
+     "src": "images/6c1850658e85.jpg",
+     "thumb": "images/6c1850658e85_t.jpg",
      "w": 1200,
      "h": 1600
     }
