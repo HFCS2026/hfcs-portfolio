@@ -22,9 +22,9 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -37,7 +37,7 @@ jobs:
           PRE_FORM_ID: ${{ vars.PRE_FORM_ID || '261183496401052' }}
           POST_FORM_ID: ${{ vars.POST_FORM_ID || '261183572696063' }}
           PUBLISH_GATE: ${{ vars.PUBLISH_GATE || 'flag' }}
-          REQUIRE_CONSENT: ${{ vars.REQUIRE_CONSENT || 'true' }}
+          REQUIRE_CONSENT: ${{ vars.REQUIRE_CONSENT || 'false' }}
         run: python sync_portfolio.py
 
       - name: Publish if anything changed
