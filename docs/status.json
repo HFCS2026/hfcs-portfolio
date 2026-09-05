@@ -1,15 +1,15 @@
 {
- "generated": "2026-09-05T00:33:19+00:00",
+ "generated": "2026-09-05T00:38:20+00:00",
  "gate": "flag",
  "approve_keyword": "#portfolio",
  "require_consent": true,
  "counts": {
-  "walkthroughs": 5,
-  "closeouts": 3,
-  "matched": 3,
+  "walkthroughs": 6,
+  "closeouts": 4,
+  "matched": 4,
   "unmatched_closeouts": 0,
   "published": 2,
-  "held": 1
+  "held": 2
  },
  "jobs": [
   {
@@ -22,6 +22,17 @@
    "flag_raw": "1",
    "published": false,
    "reason": "no photo release on the walkthrough"
+  },
+  {
+   "ref": "468459",
+   "date": "2026-08-27",
+   "service": "House Cleaning",
+   "before_photos": 11,
+   "after_photos": 10,
+   "starred": false,
+   "flag_raw": "0",
+   "published": false,
+   "reason": "not approved \u2014 star the closeout in Jotform, or put #portfolio in its Notes"
   },
   {
    "ref": "321745",
