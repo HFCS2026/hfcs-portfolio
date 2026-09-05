@@ -33,48 +33,39 @@
   .count{margin-left:auto;font-size:13px;color:#8b949b;white-space:nowrap}
 
   /* ---- grid ---- */
-  .grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+  .grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}
   .card{
     background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
     overflow:hidden;box-shadow:var(--shadow);transition:.18s ease;
+    display:flex;flex-direction:column;
   }
   .card:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(20,22,24,.06),0 14px 32px rgba(20,22,24,.10)}
-  .meta{padding:14px 16px 16px}
+
+  /* ---- hero: two labelled halves, never claimed to be the same room ---- */
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);
+        cursor:zoom-in;position:relative}
+  .hero.one{grid-template-columns:1fr}
+  .half{position:relative;aspect-ratio:1/1;background:var(--soft);overflow:hidden}
+  .hero.one .half{aspect-ratio:4/3}
+  .half img{width:100%;height:100%;object-fit:cover;display:block}
+  .lab{
+    position:absolute;top:9px;left:9px;font:700 10px/1 inherit;letter-spacing:.11em;
+    text-transform:uppercase;color:#fff;background:rgba(20,22,24,.66);
+    padding:5px 8px;border-radius:4px;pointer-events:none;
+  }
+  .half.a .lab{background:rgba(41,171,226,.94)}
+  .more{
+    position:absolute;right:8px;bottom:8px;font:600 11px/1 inherit;color:#fff;
+    background:rgba(20,22,24,.66);padding:6px 9px;border-radius:5px;pointer-events:none;
+  }
+
+  .meta{padding:14px 16px 16px;margin-top:auto}
   .svc{
     display:inline-block;font:700 11px/1 inherit;letter-spacing:.09em;text-transform:uppercase;
     color:var(--cyan-dark);background:rgba(41,171,226,.10);padding:6px 9px;border-radius:5px;
   }
   .title{margin:9px 0 0;font:600 16px/1.35 inherit;color:var(--ink)}
-  .date{margin:4px 0 0;font-size:13px;color:#949ca3}
-
-  /* ---- before / after slider ---- */
-  .ba{position:relative;aspect-ratio:4/3;background:var(--soft);overflow:hidden;
-      cursor:ew-resize;touch-action:none;user-select:none}
-  .ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-  .ba .after{clip-path:inset(0 0 0 var(--x,50%))}
-  .ba .handle{position:absolute;top:0;bottom:0;left:var(--x,50%);width:2px;
-      background:#fff;box-shadow:0 0 0 1px rgba(20,22,24,.18);pointer-events:none}
-  .ba .knob{position:absolute;top:50%;left:var(--x,50%);width:38px;height:38px;
-      transform:translate(-50%,-50%);border-radius:50%;background:#fff;
-      box-shadow:0 2px 10px rgba(20,22,24,.3);pointer-events:none;
-      display:grid;place-items:center}
-  .ba .knob::before{content:"‹ ›";font:600 15px/1 inherit;color:var(--cyan-dark);letter-spacing:-1px}
-  .tag{
-    position:absolute;top:10px;font:700 10.5px/1 inherit;letter-spacing:.1em;
-    text-transform:uppercase;color:#fff;background:rgba(20,22,24,.62);
-    padding:6px 9px;border-radius:4px;pointer-events:none;backdrop-filter:blur(2px);
-  }
-  .tag.b{left:10px} .tag.a{right:10px;background:rgba(41,171,226,.92)}
-  .expand{
-    position:absolute;right:10px;bottom:10px;z-index:2;appearance:none;border:0;
-    background:rgba(20,22,24,.62);color:#fff;font:600 12px/1 inherit;
-    padding:8px 11px;border-radius:6px;cursor:pointer;backdrop-filter:blur(2px);
-  }
-  .expand:hover{background:var(--cyan)}
-
-  /* single (unpaired) photo */
-  .single{position:relative;aspect-ratio:4/3;background:var(--soft);cursor:zoom-in}
-  .single img{width:100%;height:100%;object-fit:cover;display:block}
+  .sub{margin:4px 0 0;font-size:13px;color:#949ca3}
 
   /* ---- states ---- */
   .state{padding:56px 20px;text-align:center;color:#8b949b}
@@ -84,29 +75,41 @@
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
 
   /* ---- lightbox ---- */
-  dialog#lb{border:0;padding:0;background:transparent;max-width:min(1100px,94vw);width:100%}
-  dialog#lb::backdrop{background:rgba(12,14,16,.88)}
+  dialog#lb{border:0;padding:0;background:transparent;max-width:min(1180px,95vw);width:100%}
+  dialog#lb::backdrop{background:rgba(12,14,16,.9)}
   #lb .shell{background:#0e1012;border-radius:12px;overflow:hidden}
-  #lb .stage{position:relative;height:min(78vh,68vw);min-height:280px;background:#0e1012}
-  #lb .ba,#lb .single{position:absolute;inset:0;width:100%;height:100%;
-      aspect-ratio:auto;max-height:none}
-  #lb .ba img{position:absolute;inset:0;width:100%;height:100%;
-      object-fit:contain;background:#0e1012}
-  #lb .cap{display:flex;gap:12px;align-items:center;padding:12px 16px;color:#cfd6db;font-size:14px}
+  #lb .stage{position:relative;height:min(66vh,62vw);min-height:250px;background:#0e1012;
+             overflow:hidden}
+  #lb .stage img{width:100%;height:100%;object-fit:contain;display:block}
+  #lb .stage .lab{top:12px;left:12px;font-size:11px;padding:6px 10px}
+  #lb .cap{display:flex;gap:12px;align-items:center;padding:11px 14px;color:#cfd6db;font-size:14px;
+           flex-wrap:wrap}
   #lb .cap b{color:#fff;font-weight:600}
   #lb .of{color:#8a949c;font-size:13px}
   #lb .nav{margin-left:auto;display:flex;gap:8px}
-  #lb .nav button,#lb .close{appearance:none;border:0;background:#22282d;color:#fff;
+  #lb button{appearance:none;border:0;background:#22282d;color:#fff;
       font:600 13px/1 inherit;padding:9px 14px;border-radius:6px;cursor:pointer}
-  #lb .nav button:hover,#lb .close:hover{background:var(--cyan)}
-  #lb .nav button[disabled]{opacity:.35;cursor:default}
-  #lb .nav button[disabled]:hover{background:#22282d}
+  #lb button:hover{background:var(--cyan)}
+  #lb button[disabled]{opacity:.35;cursor:default}
+  #lb button[disabled]:hover{background:#22282d}
+
+  /* thumbnail rail, grouped */
+  #lb .rail{display:flex;gap:6px;overflow-x:auto;padding:10px 14px 14px;background:#0e1012;
+            border-top:1px solid #1d2226;align-items:center}
+  #lb .rail .gl{font:700 9.5px/1 inherit;letter-spacing:.12em;text-transform:uppercase;
+                color:#7d878f;padding:0 8px 0 2px;white-space:nowrap;flex:0 0 auto}
+  #lb .rail .gl.a{color:var(--cyan)}
+  #lb .rail img{width:58px;height:58px;object-fit:cover;border-radius:5px;cursor:pointer;
+                flex:0 0 auto;opacity:.5;transition:.15s;border:2px solid transparent}
+  #lb .rail img:hover{opacity:.85}
+  #lb .rail img[aria-current="true"]{opacity:1;border-color:var(--cyan)}
 
   @media (max-width:640px){
     .wrap{padding:4px 14px 32px}
     .grid{gap:18px;grid-template-columns:1fr}
     .bar{padding:10px 0 16px}
     .count{width:100%;margin:4px 0 0}
+    #lb .stage{height:min(58vh,80vw)}
   }
 </style>
 </head>
@@ -122,12 +125,15 @@
 <dialog id="lb">
   <div class="shell">
     <div class="stage" id="lbStage"></div>
-    <div class="cap"><b id="lbTitle"></b><span id="lbDate"></span><span class="of" id="lbOf"></span>
+    <div class="cap">
+      <b id="lbTitle"></b><span id="lbDate"></span><span class="of" id="lbOf"></span>
       <span class="nav">
         <button type="button" id="lbPrev" aria-label="Previous photo">‹ Prev</button>
         <button type="button" id="lbNext" aria-label="Next photo">Next ›</button>
+        <button type="button" id="lbClose">Close</button>
       </span>
-      <button class="close" id="lbClose">Close</button></div>
+    </div>
+    <div class="rail" id="lbRail"></div>
   </div>
 </dialog>
 
@@ -155,98 +161,94 @@
   window.addEventListener("resize", reportHeight);
   setInterval(reportHeight, 700);
 
-  /* ---------- before/after slider ---------- */
-  function slider(pair, opts) {
-    opts = opts || {};
-    var el = document.createElement("div");
-    el.className = "ba";
-    el.style.setProperty("--x", "50%");
-
-    var before = new Image();
-    before.src = opts.full ? pair.before.src : pair.before.thumb;
-    before.alt = "Before";
-    before.loading = "lazy";
-    before.decoding = "async";
-
-    var after = new Image();
-    after.className = "after";
-    after.src = opts.full ? pair.after.src : pair.after.thumb;
-    after.alt = "After";
-    after.loading = "lazy";
-    after.decoding = "async";
-
-    var handle = document.createElement("div"); handle.className = "handle";
-    var knob = document.createElement("div"); knob.className = "knob";
-    var tb = document.createElement("span"); tb.className = "tag b"; tb.textContent = "Before";
-    var ta = document.createElement("span"); ta.className = "tag a"; ta.textContent = "After";
-
-    el.append(before, after, handle, knob, tb, ta);
-
-    var dragging = false;
-    function move(clientX) {
-      var r = el.getBoundingClientRect();
-      var pct = ((clientX - r.left) / r.width) * 100;
-      pct = Math.max(0, Math.min(100, pct));
-      el.style.setProperty("--x", pct.toFixed(2) + "%");
-    }
-    el.addEventListener("pointerdown", function (e) {
-      // let the "View larger" button receive its own click
-      if (e.target.closest && e.target.closest(".expand")) return;
-      dragging = true; el.setPointerCapture(e.pointerId); move(e.clientX);
-    });
-    el.addEventListener("pointermove", function (e) { if (dragging) move(e.clientX); });
-    el.addEventListener("pointerup", function () { dragging = false; });
-    el.addEventListener("pointercancel", function () { dragging = false; });
-    // hover-to-reveal on a mouse, so the effect is discoverable without dragging
-    el.addEventListener("mousemove", function (e) { if (!dragging && e.buttons === 0) move(e.clientX); });
-    el.addEventListener("mouseleave", function () {
-      if (!dragging) el.style.setProperty("--x", "50%");
-    });
-    return el;
+  function prettyDate(iso) {
+    var p = String(iso).split("-");
+    if (p.length !== 3) return "";
+    var months = ["January","February","March","April","May","June","July",
+                  "August","September","October","November","December"];
+    var m = months[parseInt(p[1], 10) - 1];
+    return m ? m + " " + parseInt(p[2], 10) + ", " + p[0] : "";
   }
 
-  /* ---------- lightbox ---------- */
-  var lbItem = null, lbSlides = [], lbAt = 0;
+  function before(i) { return i.before || []; }
+  function after(i)  { return i.after  || []; }
 
-  function slidesFor(item) {
-    var out = (item.pairs || []).map(function (p) { return { kind: "pair", data: p }; });
-    (item.extras || []).forEach(function (m) { out.push({ kind: "one", data: m }); });
+  /* ---------- lightbox ---------- */
+  var lbItem = null, lbShots = [], lbAt = 0;
+
+  function shotsFor(item) {
+    var out = [];
+    before(item).forEach(function (m, n) {
+      out.push({ m: m, group: "Before", n: n + 1, of: before(item).length });
+    });
+    after(item).forEach(function (m, n) {
+      out.push({ m: m, group: "After", n: n + 1, of: after(item).length });
+    });
     return out;
   }
 
-  function paintSlide() {
+  function paint() {
+    var s = lbShots[lbAt];
+    if (!s) return;
     var stage = document.getElementById("lbStage");
     stage.innerHTML = "";
-    var s = lbSlides[lbAt];
-    if (!s) return;
-    if (s.kind === "pair") {
-      stage.appendChild(slider(s.data, { full: true }));
-    } else {
-      var img = new Image();
-      img.src = s.data.src; img.alt = lbItem.title || lbItem.service;
-      img.style.cssText = "width:100%;height:100%;object-fit:contain";
-      stage.appendChild(img);
-    }
-    var many = lbSlides.length > 1;
-    document.getElementById("lbOf").textContent = many ? (lbAt + 1) + " of " + lbSlides.length : "";
-    document.getElementById("lbPrev").disabled = !many || lbAt === 0;
-    document.getElementById("lbNext").disabled = !many || lbAt === lbSlides.length - 1;
+    var img = new Image();
+    img.src = s.m.src;
+    img.alt = s.group + " photo " + s.n + " of " + s.of;
+    stage.appendChild(img);
+    var lab = document.createElement("span");
+    lab.className = "lab";
+    lab.textContent = s.group;
+    if (s.group === "After") lab.style.background = "rgba(41,171,226,.94)";
+    stage.appendChild(lab);
+
+    document.getElementById("lbOf").textContent = s.group + " " + s.n + " of " + s.of;
+    document.getElementById("lbPrev").disabled = lbAt === 0;
+    document.getElementById("lbNext").disabled = lbAt === lbShots.length - 1;
+
+    var rail = document.getElementById("lbRail");
+    Array.prototype.forEach.call(rail.querySelectorAll("img"), function (t, n) {
+      t.setAttribute("aria-current", String(n === lbAt));
+    });
+    var cur = rail.querySelector('img[aria-current="true"]');
+    if (cur && cur.scrollIntoView) cur.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }
+
+  function buildRail() {
+    var rail = document.getElementById("lbRail");
+    rail.innerHTML = "";
+    var lastGroup = null;
+    lbShots.forEach(function (s, n) {
+      if (s.group !== lastGroup) {
+        var gl = document.createElement("span");
+        gl.className = "gl" + (s.group === "After" ? " a" : "");
+        gl.textContent = s.group;
+        rail.appendChild(gl);
+        lastGroup = s.group;
+      }
+      var t = new Image();
+      t.src = s.m.thumb; t.alt = s.group + " " + s.n;
+      t.loading = "lazy"; t.decoding = "async";
+      t.addEventListener("click", function () { lbAt = n; paint(); });
+      rail.appendChild(t);
+    });
   }
 
   function openLightbox(item, index) {
     lbItem = item;
-    lbSlides = slidesFor(item);
-    lbAt = Math.max(0, Math.min(index || 0, lbSlides.length - 1));
+    lbShots = shotsFor(item);
+    if (!lbShots.length) return;
+    lbAt = Math.max(0, Math.min(index || 0, lbShots.length - 1));
     document.getElementById("lbTitle").textContent = item.title || item.service;
     document.getElementById("lbDate").textContent = item.date ? prettyDate(item.date) : "";
-    paintSlide();
+    buildRail();
+    paint();
     if (typeof lb.showModal === "function") lb.showModal();
   }
 
   function step(n) {
-    if (!lbSlides.length) return;
-    lbAt = Math.max(0, Math.min(lbAt + n, lbSlides.length - 1));
-    paintSlide();
+    lbAt = Math.max(0, Math.min(lbAt + n, lbShots.length - 1));
+    paint();
   }
   document.getElementById("lbPrev").addEventListener("click", function () { step(-1); });
   document.getElementById("lbNext").addEventListener("click", function () { step(1); });
@@ -257,59 +259,61 @@
     if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
   });
 
-  /* ---------- rendering ---------- */
-  function prettyDate(iso) {
-    var p = String(iso).split("-");
-    if (p.length !== 3) return "";
-    var months = ["January","February","March","April","May","June","July",
-                  "August","September","October","November","December"];
-    var m = months[parseInt(p[1], 10) - 1];
-    return m ? m + " " + parseInt(p[2], 10) + ", " + p[0] : "";
+  /* ---------- cards ---------- */
+  function half(media, label, cls) {
+    var d = document.createElement("div");
+    d.className = "half " + cls;
+    var img = new Image();
+    img.src = media.thumb; img.alt = label + " photo";
+    img.loading = "lazy"; img.decoding = "async";
+    var l = document.createElement("span");
+    l.className = "lab"; l.textContent = label;
+    d.append(img, l);
+    return d;
   }
 
   function card(item) {
+    var b = before(item), a = after(item);
     var el = document.createElement("article");
     el.className = "card";
 
-    if (item.pairs && item.pairs.length) {
-      var s = slider(item.pairs[0]);
-      var btn = document.createElement("button");
-      btn.className = "expand"; btn.type = "button"; btn.textContent = "View larger";
-      btn.addEventListener("click", function (e) { e.stopPropagation(); openLightbox(item, 0); });
-      s.appendChild(btn);
-      el.appendChild(s);
-    } else if (item.extras && item.extras.length) {
-      var wrap = document.createElement("div");
-      wrap.className = "single";
-      var img = new Image();
-      img.src = item.extras[0].thumb; img.alt = item.title;
-      img.loading = "lazy"; img.decoding = "async";
-      wrap.appendChild(img);
-      wrap.addEventListener("click", function () { openLightbox(item, 0); });
-      el.appendChild(wrap);
+    var hero = document.createElement("div");
+    hero.className = "hero" + (b.length && a.length ? "" : " one");
+    if (b.length) hero.appendChild(half(b[0], "Before", "b"));
+    if (a.length) hero.appendChild(half(a[0], "After", "a"));
+
+    var total = b.length + a.length;
+    if (total > 2) {
+      var more = document.createElement("span");
+      more.className = "more";
+      more.textContent = "View all " + total + " photos";
+      hero.appendChild(more);
     }
+    hero.addEventListener("click", function () { openLightbox(item, 0); });
+    el.appendChild(hero);
 
     var meta = document.createElement("div");
     meta.className = "meta";
-    var svc = document.createElement("span"); svc.className = "svc"; svc.textContent = item.service;
-    var t = document.createElement("h3"); t.className = "title";
-    t.textContent = item.title && item.title !== item.service ? item.title : shotLine(item);
+    var svc = document.createElement("span");
+    svc.className = "svc"; svc.textContent = item.service;
+    var t = document.createElement("h3");
+    t.className = "title";
+    t.textContent = item.title && item.title !== item.service ? item.title : "Completed job";
     meta.append(svc, t);
-    if (item.date) {
-      var d = document.createElement("p"); d.className = "date"; d.textContent = prettyDate(item.date);
-      meta.appendChild(d);
-    }
+
+    var sub = document.createElement("p");
+    sub.className = "sub";
+    var bits = [];
+    if (b.length) bits.push(b.length + " before");
+    if (a.length) bits.push(a.length + " after");
+    sub.textContent = bits.join(" · ") + (item.date ? "  ·  " + prettyDate(item.date) : "");
+    meta.appendChild(sub);
+
     el.appendChild(meta);
     return el;
   }
 
-  function shotLine(item) {
-    var n = (item.pairs || []).length, x = (item.extras || []).length;
-    if (n > 1) return n + " before-and-after sets";
-    if (n === 1) return x ? "Before and after, plus " + x + " more" : "Before and after";
-    return x > 1 ? x + " photos" : "Completed job";
-  }
-
+  /* ---------- render ---------- */
   function render() {
     var items = data.items.filter(function (i) {
       return filter === "All" || i.service === filter;
@@ -352,15 +356,8 @@
   }
 
   fetch(FEED + "?v=" + Date.now(), { cache: "no-store" })
-    .then(function (r) {
-      if (!r.ok) throw new Error("feed " + r.status);
-      return r.json();
-    })
-    .then(function (j) {
-      data = j;
-      buildBar();
-      render();
-    })
+    .then(function (r) { if (!r.ok) throw new Error("feed " + r.status); return r.json(); })
+    .then(function (j) { data = j; buildBar(); render(); })
     .catch(function () {
       grid.innerHTML = "";
       state.hidden = false;

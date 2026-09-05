@@ -392,13 +392,17 @@ def process_image(url: str) -> dict | None:
 # --------------------------------------------------------------------------
 
 def build_item(job: dict) -> dict | None:
-    pre, post = job["pre"], job["post"]
-    befores = [m for m in (process_image(u) for u in pre["photos"]) if m]
-    afters = [m for m in (process_image(u) for u in post["photos"]) if m]
+    """One job = every before shot and every after shot, kept as two groups.
 
-    pairs = [{"before": b, "after": a} for b, a in zip(befores, afters)]
-    extras = befores[len(pairs):] + afters[len(pairs):]
-    if not pairs and not extras:
+    We deliberately do NOT pair individual photos. Crews do not shoot the same
+    rooms in the same order, and guessing produces a bathroom labelled "before"
+    next to a living room labelled "after" — which reads as carelessness to the
+    exact customer we are trying to win.
+    """
+    pre, post = job["pre"], job["post"]
+    before = [m for m in (process_image(u) for u in pre["photos"]) if m]
+    after = [m for m in (process_image(u) for u in post["photos"]) if m]
+    if not before and not after:
         return None
 
     service = norm_service(pre["service"])
@@ -409,8 +413,8 @@ def build_item(job: dict) -> dict | None:
         "date": post["date"] or pre["date"],
         "title": caption or service,
         "caption": caption,
-        "pairs": pairs,
-        "extras": extras,
+        "before": before,
+        "after": after,
         "source": "jotform",
     }
 
@@ -423,25 +427,18 @@ def load_seed() -> list[dict]:
     items = json.loads(manifest.read_text()).get("items", [])
     out = []
     for it in items:
-        copied = {"pairs": [], "extras": []}
-        for pair in it.get("pairs", []):
-            b, a = seed_image(pair.get("before")), seed_image(pair.get("after"))
-            if b and a:
-                copied["pairs"].append({"before": b, "after": a})
-        for single in it.get("extras", []):
-            m = seed_image(single)
-            if m:
-                copied["extras"].append(m)
-        if not copied["pairs"] and not copied["extras"]:
+        before = [m for m in (seed_image(n) for n in it.get("before", [])) if m]
+        after = [m for m in (seed_image(n) for n in it.get("after", [])) if m]
+        if not before and not after:
             continue
         out.append({
-            "id": it.get("id") or f"seed-{slug(json.dumps(it))}",
+            "id": it.get("id") or f"seed-{slug(json.dumps(it, sort_keys=True))}",
             "service": norm_service(it.get("service", "")),
             "date": it.get("date", ""),
             "title": it.get("title") or norm_service(it.get("service", "")),
             "caption": it.get("caption", ""),
-            "pairs": copied["pairs"],
-            "extras": copied["extras"],
+            "before": before,
+            "after": after,
             "source": "seed",
         })
     return out
@@ -531,9 +528,8 @@ def write_status(pres, posts, jobs, orphans, decided) -> None:
 
 
 def iter_media(item: dict):
-    for p in item.get("pairs", []):
-        yield p["before"]; yield p["after"]
-    yield from item.get("extras", [])
+    yield from item.get("before", [])
+    yield from item.get("after", [])
 
 
 # --------------------------------------------------------------------------
@@ -554,7 +550,7 @@ def make_sample() -> None:
     ]
     items = []
     for n, (service, title, date, shades) in enumerate(demos):
-        pair = {}
+        groups = {}
         for (rgb, label) in shades:
             key = f"sample-{n}-{label.lower()}"
             img = Image.new("RGB", (1400, 1050), rgb)
@@ -562,13 +558,13 @@ def make_sample() -> None:
             for i in range(0, 1400, 60):
                 d.line([(i, 0), (i - 300, 1050)], fill=tuple(max(0, c - 12) for c in rgb), width=18)
             d.rectangle([40, 40, 360, 130], fill=(41, 171, 226))
-            d.text((70, 72), f"{label} — sample", fill=(255, 255, 255))
             img.save(IMAGES / f"{key}.jpg", "JPEG", quality=82)
             img.resize((700, 525)).save(IMAGES / f"{key}_t.jpg", "JPEG", quality=82)
-            pair[label.lower()] = {"src": f"images/{key}.jpg", "thumb": f"images/{key}_t.jpg",
-                                   "w": 1400, "h": 1050}
+            groups[label.lower()] = [{"src": f"images/{key}.jpg", "thumb": f"images/{key}_t.jpg",
+                                      "w": 1400, "h": 1050}]
         items.append({"id": f"sample-{n}", "service": service, "date": date,
-                      "title": title, "caption": "", "pairs": [pair], "extras": [],
+                      "title": title, "caption": "",
+                      "before": groups["before"], "after": groups["after"],
                       "source": "sample"})
     write_feed(items)
     log("Sample gallery built. Open docs/index.html to preview it.")

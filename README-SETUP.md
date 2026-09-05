@@ -19,12 +19,18 @@ Crew submits closeout    ──┘        · matches before + after by customer 
                                           │
                                           ▼
                           happyfamilycleaningsolutions.com/portfolio
-                          (a draggable before/after slider per job,
-                           filterable by service)
+                          (each job as a labelled Before group and After
+                           group, filterable by service)
 ```
 
 **You approve everything.** Nothing goes public on its own — your star on a closeout submission
 is the only thing that publishes a job. See *Step 6 — the daily habit*.
+
+**Photos are never paired one-to-one.** Each job shows a Before group and an After group, and the
+card shows one from each side by side. Crews do not shoot the same rooms in the same order, and
+guessing produces a bathroom labelled "before" next to a living room labelled "after" — which
+reads as carelessness to exactly the customer we are trying to win. Grouping is always honest and
+needs no work from you.
 
 **Cost: $0.** GitHub Pages hosts the gallery and GitHub Actions runs the schedule, both free.
 
