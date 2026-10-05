@@ -1,28 +1,17 @@
 {
- "generated": "2026-10-05T00:44:22+00:00",
+ "generated": "2026-10-05T10:34:44+00:00",
  "gate": "flag",
  "approve_keyword": "#portfolio",
  "require_consent": false,
  "counts": {
   "walkthroughs": 11,
-  "closeouts": 9,
-  "matched": 8,
+  "closeouts": 8,
+  "matched": 7,
   "unmatched_closeouts": 1,
-  "published": 5,
+  "published": 4,
   "held": 3
  },
  "jobs": [
-  {
-   "ref": "730959",
-   "date": "2026-07-31",
-   "service": "Junk Removal",
-   "before_photos": 2,
-   "after_photos": 4,
-   "starred": true,
-   "flag_raw": "1",
-   "published": true,
-   "reason": "starred in Jotform"
-  },
   {
    "ref": "035309",
    "date": "2026-08-22",
