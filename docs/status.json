@@ -1,10 +1,10 @@
 {
- "generated": "2026-11-05T17:27:33+00:00",
+ "generated": "2026-11-05T23:41:01+00:00",
  "gate": "flag",
  "approve_keyword": "#portfolio",
  "require_consent": false,
  "counts": {
-  "walkthroughs": 11,
+  "walkthroughs": 10,
   "closeouts": 3,
   "matched": 3,
   "unmatched_closeouts": 0,
