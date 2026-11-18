@@ -1,49 +1,15 @@
 {
- "generated": "2026-11-17T16:09:08+00:00",
+ "generated": "2026-11-18T00:59:41+00:00",
  "gate": "flag",
  "approve_keyword": "#portfolio",
  "require_consent": false,
  "counts": {
-  "walkthroughs": 10,
-  "closeouts": 3,
-  "matched": 3,
+  "walkthroughs": 7,
+  "closeouts": 0,
+  "matched": 0,
   "unmatched_closeouts": 0,
   "published": 0,
-  "held": 3
+  "held": 0
  },
- "jobs": [
-  {
-   "ref": "921988",
-   "date": "2026-09-17",
-   "service": "House Cleaning",
-   "before_photos": 10,
-   "after_photos": 16,
-   "starred": false,
-   "flag_raw": "0",
-   "published": false,
-   "reason": "not approved \u2014 star the closeout in Jotform, or put #portfolio in its Notes"
-  },
-  {
-   "ref": "796280",
-   "date": "2026-09-17",
-   "service": "House Cleaning",
-   "before_photos": 9,
-   "after_photos": 10,
-   "starred": false,
-   "flag_raw": "0",
-   "published": false,
-   "reason": "not approved \u2014 star the closeout in Jotform, or put #portfolio in its Notes"
-  },
-  {
-   "ref": "024854",
-   "date": "2026-09-17",
-   "service": "House Cleaning",
-   "before_photos": 13,
-   "after_photos": 10,
-   "starred": false,
-   "flag_raw": "0",
-   "published": false,
-   "reason": "not approved \u2014 star the closeout in Jotform, or put #portfolio in its Notes"
-  }
- ]
+ "jobs": []
 }
